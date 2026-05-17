@@ -6,23 +6,27 @@ namespace Banulakwin\EloquentColumns\Concerns;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-trait HasTimestampColumns {
+trait HasTimestampColumns
+{
     use SoftDeletes {
         SoftDeletes::bootSoftDeletes as parentBootSoftDeletes;
         SoftDeletes::initializeSoftDeletes as parentInitializeSoftDeletes;
     }
 
-    protected static function bootHasTimestampColumns(): void {
+    protected static function bootHasTimestampColumns(): void
+    {
         if (static::shouldUseSoftDeletes()) {
             static::parentBootSoftDeletes();
         }
     }
 
-    protected static function shouldUseSoftDeletes(): bool {
+    protected static function shouldUseSoftDeletes(): bool
+    {
         return true;
     }
 
-    public function initializeHasTimestampColumns(): void {
+    public function initializeHasTimestampColumns(): void
+    {
         $casts = [
             $this->getCreatedAtColumn() => 'datetime',
             $this->getUpdatedAtColumn() => 'datetime',
@@ -34,19 +38,23 @@ trait HasTimestampColumns {
         }
     }
 
-    public function getCreatedAtColumn(): string {
+    public function getCreatedAtColumn(): string
+    {
         return 'created_at';
     }
 
-    public function getUpdatedAtColumn(): string {
+    public function getUpdatedAtColumn(): string
+    {
         return 'updated_at';
     }
 
-    public function getDeletedAtColumn(): string {
+    public function getDeletedAtColumn(): string
+    {
         return 'deleted_at';
     }
 
-    public function initializeSoftDeletes(): void {
+    public function initializeSoftDeletes(): void
+    {
         if ($this->shouldUseSoftDeletes()) {
             $this->parentInitializeSoftDeletes();
         }

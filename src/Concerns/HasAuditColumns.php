@@ -15,8 +15,10 @@ use LogicException;
  * Relationships use {@see config('eloquent-columns.user_model')} or
  * {@see config('auth.providers.users.model')}.
  */
-trait HasAuditColumns {
-    protected static function bootHasAuditColumns(): void {
+trait HasAuditColumns
+{
+    protected static function bootHasAuditColumns(): void
+    {
         static::creating(function (self $model): void {
             if (Auth::check()) {
                 $createdByColumn = $model->getCreatedByColumn();
@@ -43,29 +45,33 @@ trait HasAuditColumns {
         });
     }
 
-    protected function getCreatedByColumn(): string {
+    protected function getCreatedByColumn(): string
+    {
         return 'created_by';
     }
 
-    protected function getUpdatedByColumn(): string {
+    protected function getUpdatedByColumn(): string
+    {
         return 'updated_by';
     }
 
-    protected function getDeletedByColumn(): string {
+    protected function getDeletedByColumn(): string
+    {
         return 'deleted_by';
     }
 
     /**
      * @return class-string<Model>
      */
-    protected function resolveAuditUserModel(): string {
+    protected function resolveAuditUserModel(): string
+    {
         $configured = config('eloquent-columns.user_model');
-        if (is_string($configured) && '' !== $configured && class_exists($configured)) {
+        if (is_string($configured) && $configured !== '' && class_exists($configured)) {
             return $configured;
         }
 
         $authModel = config('auth.providers.users.model');
-        if (is_string($authModel) && '' !== $authModel && class_exists($authModel)) {
+        if (is_string($authModel) && $authModel !== '' && class_exists($authModel)) {
             return $authModel;
         }
 
@@ -74,7 +80,8 @@ trait HasAuditColumns {
         );
     }
 
-    public function initializeHasAuditColumns(): void {
+    public function initializeHasAuditColumns(): void
+    {
         $this->mergeFillable([
             $this->getCreatedByColumn(),
             $this->getUpdatedByColumn(),
@@ -85,21 +92,24 @@ trait HasAuditColumns {
     /**
      * @return BelongsTo<Model, $this>
      */
-    public function creator(): BelongsTo {
+    public function creator(): BelongsTo
+    {
         return $this->belongsTo($this->resolveAuditUserModel(), $this->getCreatedByColumn());
     }
 
     /**
      * @return BelongsTo<Model, $this>
      */
-    public function updater(): BelongsTo {
+    public function updater(): BelongsTo
+    {
         return $this->belongsTo($this->resolveAuditUserModel(), $this->getUpdatedByColumn());
     }
 
     /**
      * @return BelongsTo<Model, $this>
      */
-    public function deleter(): BelongsTo {
+    public function deleter(): BelongsTo
+    {
         return $this->belongsTo($this->resolveAuditUserModel(), $this->getDeletedByColumn());
     }
 }

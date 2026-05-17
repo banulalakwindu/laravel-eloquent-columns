@@ -8,12 +8,15 @@ use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-trait HasSortOrderColumn {
-    protected function getSortOrderColumn(): string {
+trait HasSortOrderColumn
+{
+    protected function getSortOrderColumn(): string
+    {
         return 'sort_order';
     }
 
-    protected function getSortOrderColumnDefault(): int {
+    protected function getSortOrderColumnDefault(): int
+    {
         return 0;
     }
 
@@ -21,7 +24,8 @@ trait HasSortOrderColumn {
      * @param  Builder<Model>  $builder
      */
     #[Scope]
-    protected function orderBySortOrder(Builder $builder): void {
+    protected function orderBySortOrder(Builder $builder): void
+    {
         $sortOrderColumn = $this->getSortOrderColumn();
         $builder->orderBy($sortOrderColumn);
     }
@@ -30,30 +34,35 @@ trait HasSortOrderColumn {
      * @param  Builder<Model>  $builder
      */
     #[Scope]
-    protected function orderBySortOrderDesc(Builder $builder): void {
+    protected function orderBySortOrderDesc(Builder $builder): void
+    {
         $sortOrderColumn = $this->getSortOrderColumn();
         $builder->orderBy($sortOrderColumn, 'desc');
     }
 
-    public function initializeHasSortOrderColumn(): void {
+    public function initializeHasSortOrderColumn(): void
+    {
         $sortOrderColumn = $this->getSortOrderColumn();
         $this->mergeFillable([$sortOrderColumn]);
         $this->mergeCasts([$sortOrderColumn => 'integer']);
     }
 
-    public function getSortOrder(): int {
+    public function getSortOrder(): int
+    {
         $sortOrderColumn = $this->getSortOrderColumn();
 
         return (int) $this->{$sortOrderColumn};
     }
 
-    public function setSortOrder(int $order): void {
+    public function setSortOrder(int $order): void
+    {
         $sortOrderColumn = $this->getSortOrderColumn();
         $this->{$sortOrderColumn} = $order;
         $this->save();
     }
 
-    public function moveBefore(self $item): void {
+    public function moveBefore(self $item): void
+    {
         $sortOrderColumn = $this->getSortOrderColumn();
         if ($this->{$sortOrderColumn} > $item->{$sortOrderColumn}) {
             static::query()
@@ -74,7 +83,8 @@ trait HasSortOrderColumn {
         }
     }
 
-    public function moveAfter(self $item): void {
+    public function moveAfter(self $item): void
+    {
         $sortOrderColumn = $this->getSortOrderColumn();
         if ($this->{$sortOrderColumn} > $item->{$sortOrderColumn}) {
             static::query()

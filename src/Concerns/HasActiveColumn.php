@@ -7,40 +7,48 @@ namespace Banulakwin\EloquentColumns\Concerns;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 
-trait HasActiveColumn {
-    protected function getActiveColumnDefault(): bool {
+trait HasActiveColumn
+{
+    protected function getActiveColumnDefault(): bool
+    {
         return true;
     }
 
     #[Scope]
-    protected function active(Builder $builder): void {
+    protected function active(Builder $builder): void
+    {
         $activeColumn = $this->getActiveColumn();
         $builder->where($activeColumn, true);
     }
 
-    protected function getActiveColumn(): string {
+    protected function getActiveColumn(): string
+    {
         return 'is_active';
     }
 
-    public function initializeHasActiveColumn(): void {
+    public function initializeHasActiveColumn(): void
+    {
         $activeColumn = $this->getActiveColumn();
         $this->mergeFillable([$activeColumn]);
         $this->mergeCasts([$activeColumn => 'boolean']);
     }
 
-    public function isActive(): bool {
+    public function isActive(): bool
+    {
         $activeColumn = $this->getActiveColumn();
 
         return (bool) $this->{$activeColumn};
     }
 
-    public function markActive(): void {
+    public function markActive(): void
+    {
         $activeColumn = $this->getActiveColumn();
         $this->{$activeColumn} = true;
         $this->save();
     }
 
-    public function markInactive(): void {
+    public function markInactive(): void
+    {
         $activeColumn = $this->getActiveColumn();
         $this->{$activeColumn} = false;
         $this->save();

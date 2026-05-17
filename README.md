@@ -1,6 +1,11 @@
 # Laravel Eloquent Columns (`banulakwin/laravel-eloquent-columns`)
 
-Portable **Eloquent traits** and **Blueprint macros** for common column patterns: **active**, **featured**, **sort order**, **timestamps + soft deletes**, **slug pair** (via **Spatie Sluggable**), and **audit user columns** (`created_by`, `updated_by`, `deleted_by`).
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/banulakwin/laravel-eloquent-columns.svg?style=flat-square)](https://packagist.org/packages/banulakwin/laravel-eloquent-columns)
+[![Tests](https://github.com/banulakwin/laravel-eloquent-columns/actions/workflows/tests.yml/badge.svg)](https://github.com/banulakwin/laravel-eloquent-columns/actions/workflows/tests.yml)
+[![Total Downloads](https://img.shields.io/packagist/dt/banulakwin/laravel-eloquent-columns.svg?style=flat-square)](https://packagist.org/packages/banulakwin/laravel-eloquent-columns)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
+
+Portable **Eloquent traits** and **Blueprint macros** for common column patterns: **active**, **featured**, **sort order**, **timestamps + soft deletes**, **slug pair** (via **Spatie Sluggable**), **audit user columns** (`created_by`, `updated_by`, `deleted_by`), and **SEO meta columns**.
 
 Activity/event logging is **not** included (intended as a separate package later).
 
@@ -76,6 +81,7 @@ Schema::create('posts', function (Blueprint $table) {
     $table->sortOrderColumn();
     $table->timestampColumns();
     $table->auditColumns();
+    $table->metaColumns();
 });
 ```
 
@@ -87,6 +93,7 @@ Schema::create('posts', function (Blueprint $table) {
 use Banulakwin\EloquentColumns\Concerns\HasActiveColumn;
 use Banulakwin\EloquentColumns\Concerns\HasAuditColumns;
 use Banulakwin\EloquentColumns\Concerns\HasFeaturedColumn;
+use Banulakwin\EloquentColumns\Concerns\HasMetaColumns;
 use Banulakwin\EloquentColumns\Concerns\HasSlugColumns;
 use Banulakwin\EloquentColumns\Concerns\HasSortOrderColumn;
 use Banulakwin\EloquentColumns\Concerns\HasTimestampColumns;
@@ -97,11 +104,39 @@ class Post extends Model
     use HasActiveColumn;
     use HasAuditColumns;
     use HasFeaturedColumn;
+    use HasMetaColumns;
     use HasSlugColumns;
     use HasSortOrderColumn;
     use HasTimestampColumns;
 }
 ```
+
+---
+
+## Testing
+
+```bash
+composer test          # Run PHPUnit
+composer pint          # Fix code style
+composer phpstan       # Static analysis
+composer quality       # Run all (pint + phpstan + test)
+```
+
+---
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for details.
+
+---
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/your-feature`)
+3. Run `composer quality` to ensure tests and style pass
+4. Commit and push
+5. Open a pull request
 
 ---
 
@@ -112,10 +147,12 @@ config/eloquent-columns.php
 src/Concerns/*.php
 src/Macros/*.php
 src/EloquentColumnsServiceProvider.php
+tests/Unit/Concerns/*.php
+tests/Unit/Macros/*.php
 ```
 
 ---
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE) for details.

@@ -13,17 +13,20 @@ use Banulakwin\EloquentColumns\Macros\SortOrderColumnMacros;
 use Banulakwin\EloquentColumns\Macros\TimestampColumnsMacros;
 use Illuminate\Support\ServiceProvider;
 
-final class EloquentColumnsServiceProvider extends ServiceProvider {
-    public function register(): void {
+final class EloquentColumnsServiceProvider extends ServiceProvider
+{
+    public function register(): void
+    {
         $this->mergeConfigFrom(__DIR__ . '/../config/eloquent-columns.php', 'eloquent-columns');
     }
 
-    public function boot(): void {
+    public function boot(): void
+    {
         $this->publishes([
             __DIR__ . '/../config/eloquent-columns.php' => config_path('eloquent-columns.php'),
         ], 'eloquent-columns-config');
 
-        if ( ! (bool) config('eloquent-columns.register_macros', true)) {
+        if (! (bool) config('eloquent-columns.register_macros', true)) {
             return;
         }
 

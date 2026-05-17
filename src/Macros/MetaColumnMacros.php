@@ -6,8 +6,10 @@ namespace Banulakwin\EloquentColumns\Macros;
 
 use Illuminate\Database\Schema\Blueprint;
 
-final class MetaColumnMacros {
-    public static function register(): void {
+final class MetaColumnMacros
+{
+    public static function register(): void
+    {
         Blueprint::macro('metaColumns', function (
             string $titleColumn = 'meta_title',
             string $descriptionColumn = 'meta_description',

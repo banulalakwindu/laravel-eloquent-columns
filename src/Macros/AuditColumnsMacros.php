@@ -9,8 +9,10 @@ use Illuminate\Database\Schema\Blueprint;
 /**
  * Adds nullable audit foreign keys. Use {@see $useUlid} false for bigint {@see foreignId} columns.
  */
-final class AuditColumnsMacros {
-    public static function register(): void {
+final class AuditColumnsMacros
+{
+    public static function register(): void
+    {
         Blueprint::macro(
             'auditColumns',
             function (
