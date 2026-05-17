@@ -1,7 +1,7 @@
 # Laravel Eloquent Columns (`banulakwin/laravel-eloquent-columns`)
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/banulakwin/laravel-eloquent-columns.svg?style=flat-square)](https://packagist.org/packages/banulakwin/laravel-eloquent-columns)
-[![Tests](https://github.com/banulakwin/laravel-eloquent-columns/actions/workflows/tests.yml/badge.svg)](https://github.com/banulakwin/laravel-eloquent-columns/actions/workflows/tests.yml)
+[![Tests](https://github.com/banulalakwindu/laravel-eloquent-columns/actions/workflows/tests.yml/badge.svg)](https://github.com/banulalakwindu/laravel-eloquent-columns/actions/workflows/tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/banulakwin/laravel-eloquent-columns.svg?style=flat-square)](https://packagist.org/packages/banulakwin/laravel-eloquent-columns)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 

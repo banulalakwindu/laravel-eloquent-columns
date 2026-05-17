@@ -4,10 +4,10 @@
     "type": "library",
     "license": "MIT",
     "keywords": ["laravel", "eloquent", "migration", "blueprint", "macros", "traits"],
-    "homepage": "https://github.com/banulakwin/laravel-eloquent-columns",
+    "homepage": "https://github.com/banulalakwindu/laravel-eloquent-columns",
     "support": {
-        "issues": "https://github.com/banulakwin/laravel-eloquent-columns/issues",
-        "source": "https://github.com/banulakwin/laravel-eloquent-columns"
+        "issues": "https://github.com/banulalakwindu/laravel-eloquent-columns/issues",
+        "source": "https://github.com/banulalakwindu/laravel-eloquent-columns"
     },
     "require": {
         "php": "^8.4",
@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "laravel/pint": "^1.21",
-        "orchestra/testbench": "^9.0|^10.0",
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
         "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^11.0|^12.0"
     },
